@@ -15,7 +15,13 @@ HEADERS_LIST =	checker.h
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./src/
-SOURCES_LIST =	main.c
+SOURCES_LIST =	main.c \
+				init.c \
+				checker.c \
+				operations.c \
+				print.c \
+				read.c
+
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

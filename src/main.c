@@ -6,13 +6,12 @@ int			main(int ac, char **av)
 	t_stack	*a;
 	t_stack	*b;
 
-	if (ac > 2)
+	if (ac > 1)
 	{
 		a = argument_read(ac, av);
-		for (int i = 0; i < a->lenght; i++)
-		{
-			ft_printf("%d\n", a->stack[i]);
-		}
+		b = stack_init(1, 0, 0, a->debug);
+		
+		stack_print(*a, *b);
 	}
 	else
 		print_error(ERR_PUSH_USAGE);

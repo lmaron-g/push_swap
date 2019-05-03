@@ -53,4 +53,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .gitmodules
-.gitignore
+push_swap
