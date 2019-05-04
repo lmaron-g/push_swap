@@ -19,6 +19,7 @@ SOURCES_LIST =	main.c \
 				init.c \
 				read.c \
 				operations.c \
+				push_swap.c \
 				print.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))

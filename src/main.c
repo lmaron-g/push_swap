@@ -10,7 +10,7 @@ int			main(int ac, char **av)
 	{
 		a = argument_read(ac, av);
 		b = stack_init(1, 0, 0, a->debug);
-		
+		push_swap(a, b, 0, a->lenght);
 		stack_print(*a, *b);
 	}
 	else

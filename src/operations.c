@@ -13,27 +13,29 @@ void	swap(t_stack *a, t_stack *b)
 	}
 }
 
-void		push(t_stack **a, t_stack **b)
+void		push(t_stack *a, t_stack *b)
 {
 	int		i;
-	t_stack *a_new;
-	t_stack *b_new;
+	int		*a_new;
+	int		*b_new;
 
 	i = 0;
-	if ((*a)->lenght > 0)
+	if (a->lenght > 0)
 	{
-		a_new = stack_init((*a)->id, (*a)->lenght - 1, (*a)->mid, (*a)->debug);
-		b_new = stack_init((*b)->id, (*b)->lenght + 1, (*b)->mid, (*b)->debug);
-		while (++i < (*a)->lenght)
-			a_new->stack[i - 1] = (*a)->stack[i];
-		b_new->stack[0] = (*a)->stack[0];
+		if (!(a_new = (int*)ft_memalloc(sizeof(int) * --a->lenght)))
+			print_error(ERR_STACK_INIT);
+		if (!(b_new = (int*)ft_memalloc(sizeof(int) * ++b->lenght)))
+			print_error(ERR_STACK_INIT);
+		while (++i < a->lenght + 1)
+			a_new[i - 1] = a->stack[i];
+		b_new[0] = a->stack[0];
 		i = 0;
-		while (++i < (*b)->lenght + 1)
-			b_new->stack[i] = (*b)->stack[i - 1];
-		stack_free(a);
-		stack_free(b);
-		*a = a_new;
-		*b = b_new;
+		while (++i < b->lenght)
+			b_new[i] = b->stack[i - 1];
+		free(a->stack);
+		free(b->stack);
+		a->stack = a_new;
+		b->stack = b_new;
 	}
 }
 
