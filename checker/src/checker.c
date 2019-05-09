@@ -2,7 +2,7 @@
 #include "push_swap.h"
 #include "libft.h"
 
-void		is_sort(t_stack *a, t_stack *b)
+void		is_sorts(t_stack *a, t_stack *b)
 {
 	int		i;
 
@@ -74,4 +74,5 @@ void		checker(t_stack **a, t_stack **b)
 			print_error(CHECKER_INVAL);
 		ft_strdel(&line);
 	}
+	is_sorts(a, b);
 }

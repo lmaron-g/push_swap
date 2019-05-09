@@ -16,11 +16,11 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./src/
 SOURCES_LIST =	main.c \
-				init.c \
 				read.c \
 				operations.c \
 				push_swap.c \
-				print.c
+				print.c \
+				utilities.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
