@@ -32,12 +32,12 @@ void	half_to_a(t_stack *a, t_stack *b)
 	int	i;
 
 	mid(b);
-	i = b->lenght;
+	i = b->lenght + 1;
 	while (i >= 0)
 	{
-		if (b->lenght <= 13)
+		if (b->lenght < 13)
 			like_selection_sort(a, b);
-		else if (b->stack[0] >= b->mid)
+		else if (b->stack[0] > b->mid)
 			push(b, a);
 		else if (PUSH_BACK)
 		{
@@ -79,6 +79,9 @@ void	part_to_b(t_stack *a, t_stack *b, int divider)
 		else
 			push(a, b);
 	}
+	if (is_previous(a, b, a->stack[a->lenght - 1],
+		find_min(b->stack, b->lenght)))
+		return_back(a, b);
 }
 
 void	return_back(t_stack *a, t_stack *b)
@@ -93,15 +96,13 @@ void	return_back(t_stack *a, t_stack *b)
 		rotate(a, b);
 	return_back(a, b);
 	part_to_b(a, b, divider);
-	if (is_previous(a, b, a->stack[a->lenght - 1],
-		find_min(b->stack, b->lenght)))
-		return_back(a, b);
 }
 
 void	sort_quickly(t_stack *a, t_stack *b)
 {
 	half_to_b(a, b);
 	return_back(a, b);
+	part_to_b(a, b, a->stack[(a->lenght - 1) / 2]);
 }
 
 void	push_swap(t_stack *a, t_stack *b)
@@ -113,6 +114,33 @@ void	push_swap(t_stack *a, t_stack *b)
 	else
 		sort_quickly(a, b);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 void	mover(t_stack *a, t_stack *b, int move)
