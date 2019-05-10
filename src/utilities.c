@@ -11,6 +11,8 @@ int		is_previous(t_stack *a, t_stack *b, int sub, int main)
 
 	i = 0;
 	min = main - sub;
+	if (min < 0)
+		return (0);
 	if (min == 1)
 		return (1);
 	while (i < a->lenght)

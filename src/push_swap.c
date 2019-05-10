@@ -5,31 +5,60 @@
 ** TODO: 
 **			else if (a->lenght < 20)
 **				sort_twenty(a, b);
+**
+**			fix mid();
 */
 
-void	sort_three(t_stack *a, t_stack *b)
+void	like_selection_sort(t_stack *a, t_stack *b)
 {
 	int	index;
 
-	index = index_max(a->stack, a->lenght);
+	index = index_max(b->stack, b->lenght);
 	if (index == 0)
+		push(b, a);
+	else if (PUSH_BACK)
+	{
+		push(b, a);
 		rotate(a, b);
-	if (index == 1)
-		rotate_rev(a, b);
-	if (!is_sorted(a))
-		swap(a, b);
+	}
+	else if (index <= b->lenght - index)
+		rotate(b, a);
+	else 
+		rotate_rev(b, a);
+}
+
+void	half_to_a(t_stack *a, t_stack *b)
+{
+	int	i;
+
+	mid(b);
+	i = b->lenght;
+	while (i >= 0)
+	{
+		if (b->lenght <= 13)
+			like_selection_sort(a, b);
+		else if (b->stack[0] >= b->mid)
+			push(b, a);
+		else if (PUSH_BACK)
+		{
+			push(b, a);
+			rotate(a, b);
+		}
+		else
+			rotate(b, a);
+		i--;
+	}
 }
 
 void	half_to_b(t_stack *a, t_stack *b)
 {
 	int	i;
 
-	i = 0;
 	mid(a);
 	i = a->lenght;
 	while (i >= 0)
 	{
-		if (a->stack[0] < a->mid)
+		if (a->stack[0] <= a->mid)
 			push(a, b);
 		else
 			rotate(a, b);
@@ -37,68 +66,36 @@ void	half_to_b(t_stack *a, t_stack *b)
 	}
 }
 
-void	mover(t_stack *a, t_stack *b, int move)
+void	return_back(t_stack *a, t_stack *b);
+
+void	part_to_b(t_stack *a, t_stack *b, int divider)
 {
-	int	i;
-
-	i = 0;
-	if (move > 0)
-		while (i++ < move)
-			rotate(a, b);
-	if (move < 0)
-		while (i-- > move)
-			rev_rotate(a, b);
-}
-
-void	like_selection_sort(t_stack *a, t_stack *b)
-{
-	int	move;
-	int	index;
-
-	move = MAX_INT;
-	index = index_max(b->stack, b->lenght);
-	if (index <= b->lenght - index)
-		move = index;
-	else 
-		move = -1 * (b->lenght - index);
-	mover(b, a, move);
-}
-
-void	half_to_a(t_stack *a, t_stack *b)
-{
-	int	i;
-
-	i = 0;
-	mid(b);
-	i = b->lenght;
-	while (i >= 0)
+	if (divider <= a->stack[a->lenght - 1])
+		return ;
+	while (a->stack[0] != divider)
 	{
-		if (b->stack[0] >= b->mid)
-			push(b, a);
+		if (is_previous(a, b, a->stack[a->lenght - 1], a->stack[0]))
+			rotate(a, b);
 		else
-		{
-			if (is_previous(a, b, a->stack[a->lenght - 1], b->stack[0]) ||
-				b->stack[0] == a->min)
-			{
-				push(b, a);
-				rotate(a, b);
-			}
-			else
-				rotate(b, a);
-		}
-		i--;
+			push(a, b);
 	}
 }
 
 void	return_back(t_stack *a, t_stack *b)
 {
+	int	divider;
+	
 	if (b->lenght == 0)
 		return ;
-	if (b->lenght <= 13)
-		like_selection_sort(a, b);
+	divider = a->stack[0];
 	half_to_a(a, b);
+	while (SORT_PART)
+		rotate(a, b);
 	return_back(a, b);
-
+	part_to_b(a, b, divider);
+	if (is_previous(a, b, a->stack[a->lenght - 1],
+		find_min(b->stack, b->lenght)))
+		return_back(a, b);
 }
 
 void	sort_quickly(t_stack *a, t_stack *b)
@@ -116,3 +113,18 @@ void	push_swap(t_stack *a, t_stack *b)
 	else
 		sort_quickly(a, b);
 }
+
+/*
+void	mover(t_stack *a, t_stack *b, int move)
+{
+	int	i;
+
+	i = 0;
+	if (move > 0)
+		while (i++ < move)
+			rotate(a, b);
+	if (move < 0)
+		while (i-- > move)
+			rotate_rev(a, b);
+}
+*/

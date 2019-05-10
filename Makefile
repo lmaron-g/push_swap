@@ -20,7 +20,8 @@ SOURCES_LIST =	main.c \
 				operations.c \
 				push_swap.c \
 				print.c \
-				utilities.c
+				utilities.c \
+				sort_three.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

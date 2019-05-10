@@ -52,7 +52,7 @@ t_stack			*argument_read(int ac, char **av)
 	a = argument_convert(arg_line, ac, av, a);
 	if (duplicates(a->stack, a->lenght))
 		print_error(ERR_INVALID);
-	a->min = ft_find_min(a->stack, a->lenght);
-	a->max = ft_find_max(a->stack, a->lenght);
+	a->min = find_min(a->stack, a->lenght);
+	a->max = find_max(a->stack, a->lenght);
 	return (a);
 }
