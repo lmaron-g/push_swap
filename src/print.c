@@ -14,11 +14,11 @@ void	stack_print(t_stack a, t_stack b)
 		b.lenght = -1;
 	while (i >= 0)
 	{
-		if (i <= a.lenght - 1 && i > b.lenght - 1)
+		if (i <= a.LAST && i > b.LAST)
 			ft_printf("%8d %8c\n", a.stack[a.lenght - i -1], ' ');
-		if (i > a.lenght - 1 && i <= b.lenght - 1)
+		if (i > a.LAST && i <= b.LAST)
 			ft_printf("%8c %8d\n", ' ', b.stack[b.lenght - i -1]);
-		if (i <= a.lenght - 1 && i <= b.lenght - 1)
+		if (i <= a.LAST && i <= b.LAST)
 			ft_printf("%8d %8d\n", a.stack[a.lenght - i -1], 
 									b.stack[b.lenght - i -1]);
 		i--;

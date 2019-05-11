@@ -5,7 +5,7 @@ void	sort_three(t_stack *a, t_stack *b)
 {
 	int	index;
 
-	index = index_max(a->stack, a->lenght);
+	index = index_max(a);
 	if (index == 0)
 		rotate(a, b);
 	if (index == 1)

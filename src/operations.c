@@ -10,6 +10,7 @@ void	swap(t_stack *a, t_stack *b)
 		tmp = a->stack[0];
 		a->stack[0] = a->stack[1];
 		a->stack[1] = tmp;
+		ft_printf("%d\n", 1);
 	}
 }
 
@@ -36,6 +37,7 @@ void		push(t_stack *a, t_stack *b)
 		free(b->stack);
 		a->stack = a_new;
 		b->stack = b_new;
+		ft_printf("%d\n", 1);
 	}
 }
 
@@ -46,11 +48,12 @@ void	rotate(t_stack *a, t_stack *b)
 
 	i = 0;
 	change = a->stack[0];
-	while (i < a->lenght - 1)
+	while (i < a->LAST)
 	{
 		a->stack[i] = a->stack[i + 1];
 		i++;
 	}
+	ft_printf("%d\n", 1);
 	a->stack[i] = change;
 }
 
@@ -59,12 +62,13 @@ void		rotate_rev(t_stack *a, t_stack *b)
 	int		i;
 	int		change;
 
-	i = a->lenght - 1;
+	i = a->LAST;
 	change = a->stack[i];
 	while (i > 0)
 	{
 		a->stack[i] = a->stack[i - 1];
 		i--;
 	}
+	ft_printf("%d\n", 1);
 	a->stack[i] = change;
 }

@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP
 # define PUSH_SWAP
 
+#define LAST lenght - 1
 
 #define PUSH_BACK (is_previous(a, b, a->stack[a->lenght - 1], b->stack[0]) || \
 						b->stack[0] == a->min)
@@ -19,6 +20,11 @@ void			rotate_rev(t_stack *a, t_stack *b);
 
 void			push_swap(t_stack *a, t_stack *b);
 void			sort_three(t_stack *a, t_stack *b);
+void			half_to_b(t_stack *a, t_stack *b);
+void			half_to_a(t_stack *a, t_stack *b);
+void			part_to_b(t_stack *a, t_stack *b, int divider);
+void			return_back(t_stack *a, t_stack *b);
+
 
 
 
