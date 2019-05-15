@@ -2,11 +2,45 @@
 # define CHECKER_H
 
 #include "push_swap.h"
+#include "libft.h"
+
+#define WIDTH 1000
+#define HEIGHT 500
 
 #define CHECKER_INVAL "ERROR"
 #define ERR_CHECKER_USAGE "Usage: ./checker [-v] [STACK]"
 
-void		checker(t_stack **a, t_stack **b);
-void		is_sorts(t_stack *a, t_stack *b);
+# define ERR_FDF_INIT		"Initialization error"
+
+#define LEFT_STACK 0xF9FE37
+#define RIGHT_STACK 0xFFB838
+
+#define VAL 0x2DCE69
+#define NVAL 0x50DF85
+
+
+typedef struct	s_fdf
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*data_addr;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}				t_fdf;
+
+typedef struct			s_point
+{
+	int					x;
+	int					y;
+	int					z;
+	int					color;
+}						t_point;
+
+t_fdf		*fdf_init(void);
+
+void		checker(t_stack *a, t_stack *b, t_fdf *fdf);
+void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b);
 
 #endif

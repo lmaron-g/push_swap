@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "push_swap.h"
 
-static void	like_selection_sort(t_stack *a, t_stack *b)
+void	like_selection_sort(t_stack *a, t_stack *b)
 {
 	int		index;
 
@@ -11,12 +11,12 @@ static void	like_selection_sort(t_stack *a, t_stack *b)
 	else if (PUSH_BACK)
 	{
 		push(b, a);
-		rotate(a, b);
+		rotate(a);
 	}
 	else if (index <= b->lenght - index)
-		rotate(b, a);
+		rotate(b);
 	else 
-		rotate_rev(b, a);
+		rotate_rev(b);
 }
 
 void		half_to_a(t_stack *a, t_stack *b)
@@ -34,10 +34,10 @@ void		half_to_a(t_stack *a, t_stack *b)
 		else if (PUSH_BACK)
 		{
 			push(b, a);
-			rotate(a, b);
+			rotate(a);
 		}
 		else
-			rotate(b, a);
+			rotate(b);
 		i--;
 	}
 }
@@ -48,14 +48,18 @@ void		half_to_b(t_stack *a, t_stack *b)
 
 	mid(a);
 	i = a->lenght;
-	while (i >= 0)
+	while (i > 0 && a->lenght > 3)
 	{
+		if (a->lenght / 2 == b->lenght / 2)
+			break ;
 		if (a->stack[0] <= a->mid)
 			push(a, b);
 		else
-			rotate(a, b);
+			rotate(a);
 		i--;
 	}
+	if (a->lenght == 3)
+		sort_three(a, 0);
 }
 
 void		part_to_b(t_stack *a, t_stack *b, int divider)
@@ -65,7 +69,7 @@ void		part_to_b(t_stack *a, t_stack *b, int divider)
 	while (a->stack[0] != divider)
 	{
 		if (is_previous(a, b, a->stack[a->LAST], a->stack[0]))
-			rotate(a, b);
+			rotate(a);
 		else
 			push(a, b);
 	}

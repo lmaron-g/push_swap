@@ -30,7 +30,7 @@ static t_stack	*argument_convert(char *line, int ac, char **av, t_stack *a)
 		av++;
 		ac--;
 	}
-	a = stack_init(0, ac, 0, debug);
+	a = stack_init('a', ac, 0, 0);
 	ac = 0;
 	while (*av)
 	{

@@ -17,7 +17,7 @@ void	return_back(t_stack *a, t_stack *b)
 	divider = a->stack[0];
 	half_to_a(a, b);
 	while (SORT_PART)
-		rotate(a, b);
+		rotate(a);
 	return_back(a, b);
 	part_to_b(a, b, divider);
 }
@@ -29,12 +29,26 @@ void	sort_quickly(t_stack *a, t_stack *b)
 	part_to_b(a, b, a->min);
 }
 
+void	sort_six(t_stack *a, t_stack *b)
+{
+	int	index;
+
+	half_to_b(a, b);
+	while (SORT_PART)
+		rotate(a);
+	sort_three(b, 1);
+	while (b->lenght)
+		push(b, a);
+}
+
 void	push_swap(t_stack *a, t_stack *b)
 {
-	if (is_sorted(a))
+	if (is_sorted(a, b))
 		return ;
 	if (a->lenght < 4)
-		sort_three(a, b);
+		sort_three(a, 0);
+	else if (a->lenght < 7)
+		sort_six(a, b);
 	else
 		sort_quickly(a, b);
 }

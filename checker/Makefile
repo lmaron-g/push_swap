@@ -1,27 +1,32 @@
 NAME = checker
 
 CC = gcc
-FLAGS = #-Wall -Werror -Wextra -O3 -g
-
-INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS) -I../inc/
+FLAGS = -g#-Wall -Werror -Wextra -O3
+LIBRARIES = -lmlx -lm -lft -L$(LIBFT_DIRECTORY) -L$(MINILIBX_DIRECTORY) -framework OpenGL -framework AppKit
+INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS) -I../inc/
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
-LIBFT_DIRECTORY = ../libft/
+LIBFT_DIRECTORY = ./libft/
 LIBFT_HEADERS = $(LIBFT_DIRECTORY)includes/
 
-HEADERS_DIRECTORY = ./inc/
+MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
+MINILIBX_DIRECTORY = ./mlx/
+MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
+
 HEADERS_LIST =	checker.h
 
+HEADERS_DIRECTORY = ./inc/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./src/
+
 SOURCES_LIST =	main.c \
-				init.c \
 				checker.c \
 				operations.c \
 				print.c \
-				read.c
-
+				read.c \
+				fdf.c \
+				visualize.c 
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
@@ -39,8 +44,8 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS)
-	@$(CC) $(FLAGS) $(LIBFT) $(INCLUDES) $(OBJECTS) -o $(NAME)
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJECTS_DIRECTORY) $(OBJECTS)
+	@$(CC) $(FLAGS) $(LIBRARIES) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
@@ -56,13 +61,20 @@ $(LIBFT):
 	@echo "$(NAME): $(GREEN)Creating $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY)
 
+$(MINILIBX):
+	@echo "$(NAME): $(GREEN)Creating $(MINILIBX)...$(RESET)"
+	@$(MAKE) -sC $(MINILIBX_DIRECTORY)
+
 clean:
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
+	@$(MAKE) -sC $(MINILIBX_DIRECTORY) clean
 	@rm -rf $(OBJECTS_DIRECTORY)
 	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
+	@rm -f $(MINILIBX)
+	@echo "$(NAME): $(RED)$(MINILIBX) was deleted$(RESET)"
 	@rm -f $(LIBFT)
 	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)

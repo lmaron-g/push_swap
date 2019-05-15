@@ -15,12 +15,12 @@ void	stack_print(t_stack a, t_stack b)
 	while (i >= 0)
 	{
 		if (i <= a.LAST && i > b.LAST)
-			ft_printf("%8d %8c\n", a.stack[a.lenght - i -1], ' ');
+			ft_printf("%8d %8c\n", a.stack[a.lenght - i - 1], ' ');
 		if (i > a.LAST && i <= b.LAST)
-			ft_printf("%8c %8d\n", ' ', b.stack[b.lenght - i -1]);
+			ft_printf("%8c %8d\n", ' ', b.stack[b.lenght - i - 1]);
 		if (i <= a.LAST && i <= b.LAST)
-			ft_printf("%8d %8d\n", a.stack[a.lenght - i -1], 
-									b.stack[b.lenght - i -1]);
+			ft_printf("%8d %8d\n", a.stack[a.lenght - i - 1], 
+									b.stack[b.lenght - i - 1]);
 		i--;
 	}
 }

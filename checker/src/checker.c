@@ -1,64 +1,65 @@
 #include "checker.h"
 #include "push_swap.h"
+#include "mlx.h"
 #include "libft.h"
 
-void		is_sorts(t_stack *a, t_stack *b)
+static void	is_sorts(t_stack *a, t_stack *b)
 {
 	int		i;
 
 	i = 0;
 	if (b->lenght)
-		print_error(ERR_CHECKER);
+		termination(ERR_CHECKER, 1);
 	while (++i < a->lenght)
 		if (a->stack[i - 1] > a->stack[i])
-			print_error(ERR_CHECKER);
-	print_error(CHECKER_OK);
+			termination(ERR_CHECKER, 1);
+	termination(CHECKER_OK, 1);
 }
 
-static void	apply_instructions_sp(t_stack **a, t_stack **b, char *line)
+static void	apply_instructions_sp(t_stack *a, t_stack *b, char *line)
 {
 	if (ft_strequ(line, "pa"))
 		push(b, a);
 	else if (ft_strequ(line, "pb"))
 		push(a, b);
 	else if (ft_strequ(line, "sa"))
-		swap(*a, *b);
+		swap(a);
 	else if (ft_strequ(line, "sb"))
-		swap(*b, *a);
+		swap(b);
 	else if (ft_strequ(line, "ss"))
 	{
-		swap(*a, *b);
-		swap(*b, *a);
+		swap(a);
+		swap(b);
 	}
 	else
-		print_error(CHECKER_INVAL);
+		termination(CHECKER_INVAL, 1);
 }
 
-static void	apply_insrtuctions_r(t_stack **a, t_stack **b, char *line)
+static void	apply_insrtuctions_r(t_stack *a, t_stack *b, char *line)
 {
 	if (ft_strequ(line, "ra"))
-		rotate(*a, *b);
+		rotate(a);
 	else if (ft_strequ(line, "rb"))
-		rotate(*b, *a);
+		rotate(b);
 	else if (ft_strequ(line, "rra"))
-		rotate_rev(*a, *b);
+		rotate_rev(a);
 	else if (ft_strequ(line, "rrb"))
-		rotate_rev(*b, *a);
+		rotate_rev(b);
 	else if (ft_strequ(line, "rr"))
 	{	
-		rotate(*a, *b);
-		rotate(*b, *a);
+		rotate(a);
+		rotate(b);
 	}
 	else if (ft_strequ(line, "rrr"))
 	{
-		rotate_rev(*a, *b);
-		rotate_rev(*b, *a);
+		rotate_rev(a);
+		rotate_rev(b);
 	}
 	else
-		print_error(CHECKER_INVAL);
+		termination(CHECKER_INVAL, 1);
 }
 
-void		checker(t_stack **a, t_stack **b)
+void		checker(t_stack *a, t_stack *b, t_fdf *fdf)
 {
 	char	*line;
 
@@ -71,8 +72,11 @@ void		checker(t_stack **a, t_stack **b)
 		else if (ft_strequ(line, ""))
 			break ;
 		else
-			print_error(CHECKER_INVAL);
+			termination(CHECKER_INVAL, 1);
 		ft_strdel(&line);
+		/*
+		сюда
+		*/
 	}
 	is_sorts(a, b);
 }

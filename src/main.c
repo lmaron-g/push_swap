@@ -9,10 +9,9 @@ int			main(int ac, char **av)
 	if (ac > 1)
 	{
 		a = argument_read(ac, av);
-		b = stack_init(1, 0, 0, a->debug);
+		b = stack_init('b', 0, 0, 0);
 		push_swap(a, b);
 		stack_print(*a, *b);
-		is_sort(a, b);
 	}
 	else
 		print_error(ERR_PUSH_USAGE);

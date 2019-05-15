@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "push_swap.h"
 
-void	swap(t_stack *a, t_stack *b)
+void	swap(t_stack *a)
 {
 	int	tmp;
 
@@ -10,7 +10,7 @@ void	swap(t_stack *a, t_stack *b)
 		tmp = a->stack[0];
 		a->stack[0] = a->stack[1];
 		a->stack[1] = tmp;
-		ft_printf("%d\n", 1);
+		a->debug ? 0 : ft_printf("s%c\n", a->id);
 	}
 }
 
@@ -37,11 +37,11 @@ void		push(t_stack *a, t_stack *b)
 		free(b->stack);
 		a->stack = a_new;
 		b->stack = b_new;
-		ft_printf("%d\n", 1);
+		a->debug ? 0 : ft_printf("p%c\n", b->id);
 	}
 }
 
-void	rotate(t_stack *a, t_stack *b)
+void	rotate(t_stack *a)
 {
 	int		i;
 	int		change;
@@ -53,11 +53,11 @@ void	rotate(t_stack *a, t_stack *b)
 		a->stack[i] = a->stack[i + 1];
 		i++;
 	}
-	ft_printf("%d\n", 1);
 	a->stack[i] = change;
+	a->debug ? 0 : ft_printf("r%c\n", a->id);
 }
 
-void		rotate_rev(t_stack *a, t_stack *b)
+void		rotate_rev(t_stack *a)
 {
 	int		i;
 	int		change;
@@ -69,6 +69,6 @@ void		rotate_rev(t_stack *a, t_stack *b)
 		a->stack[i] = a->stack[i - 1];
 		i--;
 	}
-	ft_printf("%d\n", 1);
 	a->stack[i] = change;
+	a->debug ? 0 : ft_printf("rr%c\n", a->id);
 }
