@@ -11,7 +11,6 @@ int			main(int ac, char **av)
 		a = argument_read(ac, av);
 		b = stack_init('b', 0, 0, 0);
 		push_swap(a, b);
-		stack_print(*a, *b);
 	}
 	else
 		print_error(ERR_PUSH_USAGE);

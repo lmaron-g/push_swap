@@ -2,7 +2,7 @@
 #include "checker.h"
 #include "mlx.h"
 
-static void		plot(t_fdf *fdf, int x, int y, int color)
+static void	plot(t_fdf *fdf, int x, int y, int color)
 {
 	int		i;
 
@@ -15,10 +15,10 @@ static void		plot(t_fdf *fdf, int x, int y, int color)
 	}
 }
 
-void		setup_background(t_fdf *fdf)
+static void	setup_background(t_fdf *fdf)
 {
-	int	*image;
-	int	i;
+	int		i;
+	int		*image;
 
 	ft_bzero(fdf->data_addr, WIDTH * HEIGHT * (fdf->bits_per_pixel / 8));
 	image = (int *)(fdf->data_addr);
@@ -30,11 +30,11 @@ void		setup_background(t_fdf *fdf)
 	}
 }
 
-void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
+static void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
 {
-	int	x;
-	int	y;
-	int	end;
+	int		x;
+	int		y;
+	int		end;
 
 	x = ((WIDTH / 2) - val) / 2;
 	if (a->id == 'b')
@@ -45,9 +45,9 @@ void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
 		plot(fdf, x++, y, VAL);
 }
 
-void	vizualize(t_fdf *fdf, t_stack *a, t_stack *b)
+void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b)
 {
-	int	i;
+	int		i;
 	
 	i = FT_MAX(a->lenght, b->lenght) - 1;
 	setup_background(fdf);
@@ -60,4 +60,21 @@ void	vizualize(t_fdf *fdf, t_stack *a, t_stack *b)
 		i--;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
+}
+
+t_fdf		*fdf_init(void)
+{
+	t_fdf	*fdf;
+
+	if (!(fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf))))
+		print_error(ERR_FDF_INIT);
+	if (!(fdf->mlx = mlx_init()))
+		print_error(ERR_FDF_INIT);
+	if (!(fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "Push_Swap")))
+		print_error(ERR_FDF_INIT);
+	if (!(fdf->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT)))
+		print_error(ERR_FDF_INIT);
+	fdf->data_addr = mlx_get_data_addr(fdf->img, &(fdf->bits_per_pixel),
+										&(fdf->size_line), &(fdf->endian));
+	return (fdf);
 }

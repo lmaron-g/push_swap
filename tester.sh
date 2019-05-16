@@ -9,11 +9,17 @@ do
 	export ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 	if ./push_swap $ARG | ./checker/checker $ARG | grep -q KO
 	then
-		echo "Error!"
+		echo "Error! - KO"
 		echo $ARG
 		break
 	fi
 	NUMBER="$(./push_swap $ARG | wc -l | sed 's/ //g')"
+	if [ "$NUMBER" -gt "750" ]
+		then
+		echo "Error! > 750"
+		echo $ARG
+		break
+	fi
 	if [ "$NUMBER" -gt "$MAX" ]
 		then
 		MAX=$NUMBER;

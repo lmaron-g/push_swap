@@ -29,7 +29,8 @@ void		half_to_a(t_stack *a, t_stack *b)
 	{
 		if (b->lenght < 13)
 			like_selection_sort(a, b);
-		else if (b->stack[0] > b->mid)
+		else if (((a->lenght + b->lenght) % 2 == 0 && b->stack[0] > b->mid) ||
+				((a->lenght + b->lenght) % 2 == 1 && b->stack[0] >= b->mid))
 			push(b, a);
 		else if (PUSH_BACK)
 		{
@@ -44,19 +45,15 @@ void		half_to_a(t_stack *a, t_stack *b)
 
 void		half_to_b(t_stack *a, t_stack *b)
 {
-	int		i;
-
 	mid(a);
-	i = a->lenght;
-	while (i > 0 && a->lenght > 3)
+	while ((a->lenght / 2 != b->lenght / 2) &&
+								a->lenght > 3)
 	{
-		if (a->lenght / 2 == b->lenght / 2)
-			break ;
-		if (a->stack[0] <= a->mid)
+		if (((a->lenght + b->lenght) % 2 == 0 && a->stack[0] <= a->mid) ||
+			((a->lenght + b->lenght) % 2 == 1 && a->stack[0] < a->mid))
 			push(a, b);
 		else
 			rotate(a);
-		i--;
 	}
 	if (a->lenght == 3)
 		sort_three(a, 0);

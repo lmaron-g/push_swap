@@ -25,7 +25,6 @@ SOURCES_LIST =	main.c \
 				operations.c \
 				print.c \
 				read.c \
-				fdf.c \
 				visualize.c 
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))

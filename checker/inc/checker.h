@@ -30,14 +30,6 @@ typedef struct	s_fdf
 	int			endian;
 }				t_fdf;
 
-typedef struct			s_point
-{
-	int					x;
-	int					y;
-	int					z;
-	int					color;
-}						t_point;
-
 t_fdf		*fdf_init(void);
 
 void		checker(t_stack *a, t_stack *b, t_fdf *fdf);
