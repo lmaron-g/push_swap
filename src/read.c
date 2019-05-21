@@ -26,11 +26,11 @@ static t_stack	*argument_convert(char *line, int ac, char **av, t_stack *a)
 		print_error(ERR_INVALID);
 	if (ft_strequ(*av, "-v"))
 	{
-		debug = 1;
+		debug = 2;
 		av++;
 		ac--;
 	}
-	a = stack_init('a', ac, 0, 0);
+	a = stack_init('a', ac, 0, debug);
 	ac = 0;
 	while (*av)
 	{

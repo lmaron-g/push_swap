@@ -12,13 +12,12 @@ int			main(int ac, char **av)
 	if (ac > 1)
 	{
 		errno = 0;
-		// fdf = fdf_init();
 		a = argument_read(ac, av);
-		a->debug = 1;
-		b = stack_init('b', 0, 0, 1);
+		b = stack_init('b', 0, 0, (a->debug = 1));
+		fdf = fdf_init(a);
 		checker(a, b, fdf);
-		// vizualize(fdf, a, b);
-		// mlx_loop(fdf->mlx);
+		vizualize(fdf, a, b);
+		mlx_loop(fdf->mlx);
 	}
 	else
 		print_error(ERR_CHECKER_USAGE);

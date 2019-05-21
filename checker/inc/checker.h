@@ -5,7 +5,7 @@
 #include "libft.h"
 
 #define WIDTH 1000
-#define HEIGHT 500
+#define HEIGHT 800
 
 #define CHECKER_INVAL "ERROR"
 #define ERR_CHECKER_USAGE "Usage: ./checker [-v] [STACK]"
@@ -28,9 +28,11 @@ typedef struct	s_fdf
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+	int			zoom_x;
+	int			zoom_y;
 }				t_fdf;
 
-t_fdf		*fdf_init(void);
+t_fdf		*fdf_init(t_stack *a);
 
 void		checker(t_stack *a, t_stack *b, t_fdf *fdf);
 void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b);
