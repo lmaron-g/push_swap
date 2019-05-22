@@ -23,9 +23,9 @@ static void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
 	int		end;
 	
 	val *= fdf->zoom_x;
-	y = (i * fdf->zoom_y);
+	y = HEIGHT - (i * fdf->zoom_y);
 	block_h = fdf->zoom_y;
-	while (block_h-- && ++y)
+	while (block_h-- && --y)
 	{
 		x = ((WIDTH / 2) - val) / 2;
 		if (a->id == 'b')
@@ -61,15 +61,15 @@ void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b)
 	while (i >= 0)
 	{
 		if (i < a->lenght)
-			print_value(fdf, a, a->stack[i], i);
+			print_value(fdf, a, a->stack[i], a->lenght - i - 1);
 		if (i < b->lenght)		
-			print_value(fdf, b, b->stack[i], i);
+			print_value(fdf, b, b->stack[i], b->lenght - i - 1);
 		i--;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }
 
-t_fdf		*fdf_init(t_stack *a)
+t_fdf		*fdf_init(t_stack *a, t_stack *b)
 {
 	t_fdf	*fdf;
 
@@ -85,5 +85,7 @@ t_fdf		*fdf_init(t_stack *a)
 										&(fdf->size_line), &(fdf->endian));
 	fdf->zoom_x = (WIDTH / 2) / a->max;	
 	fdf->zoom_y = HEIGHT / a->lenght;
+	fdf->a = a;
+	fdf->b = b;
 	return (fdf);
 }

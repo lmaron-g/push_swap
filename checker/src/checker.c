@@ -74,9 +74,30 @@ void		checker(t_stack *a, t_stack *b, t_fdf *fdf)
 		else
 			termination(CHECKER_INVAL, 1);
 		ft_strdel(&line);
-		/*
-		сюда
-		*/
 	}
 	is_sorts(a, b);
+}
+
+int			visual_check(void *param)
+{
+	char	*line;
+	t_fdf	*fdf;
+
+	fdf = (t_fdf*)param;
+	if (get_next_line(0, &line))
+	{
+		if (*line == 's' || *line == 'p')
+			apply_instructions_sp(fdf->a, fdf->b, line);
+		else if (*line == 'r')
+			apply_insrtuctions_r(fdf->a, fdf->b, line);
+		else if (ft_strequ(line, ""))
+			return (0);
+		else
+			termination(CHECKER_INVAL, 1);
+		ft_strdel(&line);
+		vizualize(fdf, fdf->a, fdf->b);
+	}
+	else
+		exit(0);
+	return (0);
 }

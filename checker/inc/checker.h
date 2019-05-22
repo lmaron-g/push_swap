@@ -18,7 +18,6 @@
 #define VAL 0x2DCE69
 #define NVAL 0x50DF85
 
-
 typedef struct	s_fdf
 {
 	void		*mlx;
@@ -30,10 +29,13 @@ typedef struct	s_fdf
 	int			endian;
 	int			zoom_x;
 	int			zoom_y;
+	t_stack		*a;
+	t_stack		*b;
 }				t_fdf;
 
-t_fdf		*fdf_init(t_stack *a);
+t_fdf		*fdf_init(t_stack *a, t_stack *b);
 
+int			visual_check(void *fdf);
 void		checker(t_stack *a, t_stack *b, t_fdf *fdf);
 void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b);
 
