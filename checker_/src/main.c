@@ -10,6 +10,18 @@ int		close_win(void *param)
 	return (0);
 }
 
+int			key_press(int key, void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf*)param;
+	if (key == 53)
+		exit(0);
+	if (key == 18)
+		visual_check(fdf);
+	return (0);
+}
+
 int			main(int ac, char **av)
 {
 	t_stack	*a;
@@ -25,10 +37,11 @@ int			main(int ac, char **av)
 		{
 			fdf = fdf_init(a, b);
 			mlx_hook(fdf->win, 17, 0, close_win, fdf);
-			mlx_loop_hook(fdf->mlx, visual_check, fdf);
+			mlx_hook(fdf->win, 2, 0, key_press, fdf);
+			mlx_loop(fdf->mlx);
 		}
 		else
-			checker(a, b, fdf);
+			checker(a, b);
 	}
 	else
 		print_error(ERR_CHECKER_USAGE);

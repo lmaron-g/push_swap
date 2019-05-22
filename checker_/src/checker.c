@@ -59,7 +59,7 @@ static void	apply_insrtuctions_r(t_stack *a, t_stack *b, char *line)
 		termination(CHECKER_INVAL, 1);
 }
 
-void		checker(t_stack *a, t_stack *b, t_fdf *fdf)
+void		checker(t_stack *a, t_stack *b)
 {
 	char	*line;
 

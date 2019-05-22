@@ -36,7 +36,7 @@ typedef struct	s_fdf
 t_fdf		*fdf_init(t_stack *a, t_stack *b);
 
 int			visual_check(void *fdf);
-void		checker(t_stack *a, t_stack *b, t_fdf *fdf);
+void		checker(t_stack *a, t_stack *b);
 void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b);
 
 #endif

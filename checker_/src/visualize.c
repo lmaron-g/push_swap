@@ -54,7 +54,6 @@ static void	setup_background(t_fdf *fdf)
 void		vizualize(t_fdf *fdf, t_stack *a, t_stack *b)
 {
 	int		i;
-	int		zoom;
 	
 	i = FT_MAX(a->lenght, b->lenght) - 1;
 	setup_background(fdf);

@@ -1,13 +1,16 @@
 NAME = push_swap
 
 CC = gcc
-FLAGS = -g#-Wall -Werror -Wextra -O3 -g
+FLAGS = -Wall -Werror -Wextra
 LIBRARIES = -L$(LIBFT_DIRECTORY)
 INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS)
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY = ./libft/
 LIBFT_HEADERS = $(LIBFT_DIRECTORY)includes/
+
+CHECKER_DIRECTORY = ./checker_/
+CHECKER = $(CHECKER_DIRECTORY)checker
 
 HEADERS_DIRECTORY = ./inc/
 HEADERS_LIST =	push_swap.h
@@ -40,7 +43,7 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS)
+$(NAME): $(LIBFT) $(CHECKER) $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@$(CC) $(FLAGS) $(LIBFT) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
@@ -57,15 +60,24 @@ $(LIBFT):
 	@echo "$(NAME): $(GREEN)Creating $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY)
 
+$(CHECKER):
+	@echo "$(NAME): $(GREEN)Creating $(CHECKER)...$(RESET)"
+	@$(MAKE) -sC $(CHECKER_DIRECTORY)
+
 clean:
-	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
+	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
+	@$(MAKE) -sC $(CHECKER_DIRECTORY) clean
 
 fclean: clean
+	@$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
+	@$(MAKE) -sC $(CHECKER_DIRECTORY) fclean
 	@rm -f $(LIBFT)
 	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
+	@rm -f $(CHECKER)
+	@echo "$(NAME): $(RED)$(CHECKER) was deleted$(RESET)"
 	@rm -f $(NAME)
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 

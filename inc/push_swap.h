@@ -11,7 +11,7 @@
 #define SORT_PART (is_previous(a, b, a->stack[a->lenght - 1], a->stack[0]) || \
 				a->stack[0] == a->min && !is_sorted(a, b))
 
-t_stack			*argument_read(int ac, char **av);
+t_stack			*argument_read(int ac, char **av, int mode);
 
 void			push(t_stack *a, t_stack *b);
 void			swap(t_stack *a);

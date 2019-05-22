@@ -13,35 +13,38 @@ static char		*argument_merge(int ac, char **av)
 	return (args);
 }
 
-static t_stack	*argument_convert(char *line, int ac, char **av, t_stack *a)
+static t_stack	*argument_convert(char *line, int ac, char **av, int mode)
 {
 	int			debug;
-	int			*stack;
+	t_stack		*stack;
 
-	debug = 0;
+	debug = mode;
 	ac = count_words(line, ' ');
 	if (!ft_strlen(line) || !ac)
 		print_error(ERR_INVALID);
 	if (!(av = ft_strsplit(line, ' ')))
 		print_error(ERR_INVALID);
-	if (ft_strequ(*av, "-v"))
+	if (mode && ft_strequ(*av, "-v"))
 	{
 		debug = 2;
 		av++;
 		ac--;
 	}
-	a = stack_init('a', ac, 0, debug);
+	stack = stack_init('a', ac, 0, debug);
 	ac = 0;
 	while (*av)
 	{
 		if (!ft_isnumber_base(*av, 10))
 			print_error(ERR_INVALID);
-		a->stack[ac++] = ft_atoi(*(av++));
+		stack->stack[ac++] = ft_atoi(*(av++));
 	}
-	return(a);
+	return(stack);
 }
 
-t_stack			*argument_read(int ac, char **av)
+/*
+** mode: 0 = push_swap; 1 = cheker;
+*/
+t_stack			*argument_read(int ac, char **av, int mode)
 {
 	int			i;
 	t_stack		*a;
@@ -49,7 +52,7 @@ t_stack			*argument_read(int ac, char **av)
 
 	i = 0;
 	arg_line = argument_merge(ac, av);
-	a = argument_convert(arg_line, ac, av, a);
+	a = argument_convert(arg_line, ac, av, mode);
 	if (duplicates(a->stack, a->lenght))
 		print_error(ERR_INVALID);
 	a->min = find_min(a);

@@ -8,7 +8,7 @@ int			main(int ac, char **av)
 
 	if (ac > 1)
 	{
-		a = argument_read(ac, av);
+		a = argument_read(ac, av, 0);
 		b = stack_init('b', 0, 0, 0);
 		push_swap(a, b);
 	}
