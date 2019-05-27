@@ -2,7 +2,7 @@
 
 This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
-![push_swap](https://user-images.githubusercontent.com/45558274/58187437-6f55c300-7cbf-11e9-9a7f-924f36abd475.gif)
+![push](https://user-images.githubusercontent.com/45558274/58437827-74a67980-80d4-11e9-9698-42784522bf39.gif)
 
 ## Installation
 

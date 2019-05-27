@@ -12,11 +12,11 @@
 
 # define ERR_FDF_INIT		"Initialization error"
 
-#define LEFT_STACK 0xF9FE37
-#define RIGHT_STACK 0xFFB838
+#define LEFT_STACK 0x222222
+#define RIGHT_STACK 0x333333
 
-#define VAL 0x2DCE69
-#define NVAL 0x50DF85
+#define VAL 0x4CAF50
+#define NVAL 0xFFB86C
 
 typedef struct	s_fdf
 {

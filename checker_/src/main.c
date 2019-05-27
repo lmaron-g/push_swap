@@ -17,7 +17,7 @@ int			key_press(int key, void *param)
 	fdf = (t_fdf*)param;
 	if (key == 53)
 		exit(0);
-	if (key == 18)
+	if (key != 53)
 		visual_check(fdf);
 	return (0);
 }

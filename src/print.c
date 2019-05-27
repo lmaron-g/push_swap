@@ -23,4 +23,5 @@ void	stack_print(t_stack a, t_stack b)
 									b.stack[b.lenght - i - 1]);
 		i--;
 	}
+	ft_printf("\n");
 }

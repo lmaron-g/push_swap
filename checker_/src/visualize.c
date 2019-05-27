@@ -19,9 +19,13 @@ static void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
 {
 	int		x;
 	int		y;
-	int		block_h;
 	int		end;
+	int		color;
+	int		block_h;
 	
+	color = val < 0 ? NVAL : VAL;
+	val == 0 ? val++ : 0;
+	val *= val < 0 ? -1 : 1;
 	val *= fdf->zoom_x;
 	y = HEIGHT - (i * fdf->zoom_y);
 	block_h = fdf->zoom_y;
@@ -32,7 +36,7 @@ static void	print_value(t_fdf *fdf, t_stack *a, int val, int i)
 			x += WIDTH / 2;
 		end = x + val;
 		while (x < end)
-			plot(fdf, x++, y, VAL);
+			plot(fdf, x++, y, color);
 	}
 }
 

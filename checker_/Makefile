@@ -47,6 +47,7 @@ $(NAME): $(LIBFT) $(MINILIBX) $(OBJECTS_DIRECTORY) $(OBJECTS)
 	@$(CC) $(FLAGS) $(LIBRARIES) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
+	@rm -f ../checker
 	@ln checker ..
 
 $(OBJECTS_DIRECTORY):
@@ -71,6 +72,7 @@ clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
 	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@rm -f ../checker
 
 fclean: clean
 	@rm -f $(MINILIBX)
@@ -78,7 +80,6 @@ fclean: clean
 	@rm -f $(LIBFT)
 	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)
-	rm -f ../checker
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 
 re:

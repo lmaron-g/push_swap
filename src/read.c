@@ -38,6 +38,8 @@ static t_stack	*argument_convert(char *line, int ac, char **av, int mode)
 			print_error(ERR_INVALID);
 		stack->stack[ac++] = ft_atoi(*(av++));
 	}
+	av -= ac + (debug / 2);
+	free_words(&av);
 	return(stack);
 }
 
@@ -55,7 +57,8 @@ t_stack			*argument_read(int ac, char **av, int mode)
 	a = argument_convert(arg_line, ac, av, mode);
 	if (duplicates(a->stack, a->lenght))
 		print_error(ERR_INVALID);
+	ft_strdel(&arg_line);
 	a->min = find_min(a);
-	a->max = find_max(a);
+	a->max = find_abs_max(a);
 	return (a);
 }
